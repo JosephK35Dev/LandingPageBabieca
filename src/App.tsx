@@ -38,7 +38,7 @@ const weeklyPromos: PromoDay[] = [
     items: ['1.ª recarga → Hasta 80%'],
     groups: [
       {
-        flags: '🇵🇪🇧🇷🇺🇸',
+        flags: '',
         label: 'Perú · Brasil · EE. UU.',
         items: ['2.ª recarga → 20 giros'],
       },
@@ -65,7 +65,7 @@ const weeklyPromos: PromoDay[] = [
     items: [],
     groups: [
       {
-        flags: '🇵🇪🇧🇷🇺🇸',
+        flags: '',
         label: 'Perú · Brasil · EE. UU.',
         items: ['1.ª recarga → Según monto', '2.ª recarga → 20 giros', '3.ª recarga → 30 giros'],
       },
@@ -109,19 +109,19 @@ const steps = [
 const faqs = [
   {
     q: '¿Cómo registro mi cuenta?',
-    a: 'Haz clic en "Regístrate Ahora", completa el formulario con tus datos personales y confirma tu correo electrónico. El proceso toma menos de 2 minutos.',
+    a: 'Haz clic en "Registro", completa el formulario con tus datos personales y confirma tu correo electrónico. El proceso toma menos de 2 minutos.',
   },
   {
     q: '¿Qué métodos de pago aceptan?',
-    a: 'Aceptamos transferencias bancarias, tarjetas de crédito/débito, Nequi, Daviplata, Zinli y otras billeteras digitales según tu país de residencia.',
+    a: 'Nuestra plataforma es internacional y los métodos disponibles pueden variar según el país. Actualmente aceptamos transferencias bancarias y pagos realizados a través de corresponsales autorizados.  Las cuentas y datos de pago autorizados se encuentran disponibles directamente en nuestra plataforma. Antes de realizar una recarga, verifica siempre la información indicada allí.',
   },
   {
     q: '¿Cuál es el depósito mínimo?',
-    a: 'El depósito mínimo varía por país. En Colombia desde $20.000 COP. Consulta la tabla "Recarga más, recibe más" para ver los rangos completos.',
+    a: 'Los montos mínimos pueden variar según el método de pago disponible en cada país. Consulta las opciones habilitadas directamente en nuestra plataforma antes de realizar tu recarga.',
   },
   {
     q: '¿Cómo funciona el rollover?',
-    a: 'El rollover es el número de veces que debes apostar el bono antes de poder retirar. Un bono de $100 con rollover X5 requiere apostar $500 en total, en cuotas de 1.50 o superiores.',
+    a: 'El rollover es el número de veces que debes apostar el bono antes de poder retirar. Un bono de $100 con rollover X5 requiere apostar $500 en total.',
   },
   {
     q: '¿El 200% en deportivas tiene condiciones especiales?',
@@ -129,7 +129,7 @@ const faqs = [
   },
   {
     q: '¿El Sábado de Galope siempre está disponible?',
-    a: 'El bono del 20% en hipismo aplica los sábados en los que no haya eventos en hipódromos de Venezuela. Cuando hay jornada venezolana, esa semana no hay promo de galope.',
+    a: 'El bono del 20% en hipismo aplica los sábados en los que no haya eventos en hipódromos de Venezuela. Cuando hay jornada venezolana (Valencia), esa semana no hay promo de galope.',
   },
   {
     q: '¿Puedo apostar desde el celular?',
@@ -184,7 +184,7 @@ export default function App() {
             la semana. 🐴🔥
           </h1>
           <p className="text-[#F5F0E8]/60 text-sm md:text-base leading-relaxed mb-9 max-w-sm">
-            La casa hípica con las mejores cuotas y bonos de América Latina.
+            La casa hípica con los mejores dividendos y bonos de América Latina.
             Miles de apostadores ya ganan con nosotros cada semana.
           </p>
           <a
@@ -286,7 +286,7 @@ export default function App() {
               </div>
               <div className="bg-[#C9A227]/5 border border-[#C9A227]/15 px-4 py-3">
                 <p className="text-xs text-[#F5F0E8]/55 leading-relaxed">
-                  Sin recarga mínima. Disponible los sábados sin eventos en hipódromos de Venezuela.
+                  Sin recarga mínima. Disponible los sábados sin eventos en hipódromos de Venezuela (Valencia). 
                 </p>
               </div>
             </div>
@@ -321,10 +321,10 @@ export default function App() {
             <div className="relative">
               <div className="text-3xl mb-3">🏆</div>
               <h2 className="font-barlow font-black text-3xl uppercase text-white mb-3">
-                CARRERAS NACIONALES
+                CARRERAS NACIONALES (LA RINCONADA)
               </h2>
               <p className="text-[#F5F0E8]/55 text-sm leading-relaxed max-w-sm">
-                Vive la emoción de las carreras nacionales con Babieca. Cada domingo es una jornada épica.
+                Vive la emoción de la Rinconada con Babieca. Cada domingo es una jornada épica.
               </p>
             </div>
           </div>
@@ -395,7 +395,7 @@ export default function App() {
                 Es el número de veces que debes apostar el bono antes de poder retirar. Un bono de{' '}
                 <strong className="text-[#F5F0E8]">$100</strong> con rollover{' '}
                 <strong className="text-[#C9A227]">X5</strong> significa apostar{' '}
-                <strong className="text-[#F5F0E8]">$500 en total</strong> en cuotas de 1.50 o superiores.
+                <strong className="text-[#F5F0E8]">$500 en total</strong>.
               </p>
               <div className="bg-[#C9A227]/5 border border-[#C9A227]/15 p-4 space-y-1.5">
                 <div className="text-[9px] text-[#C9A227] uppercase tracking-widest mb-2 font-bold">
@@ -410,24 +410,6 @@ export default function App() {
                   )
                 )}
               </div>
-            </div>
-            <div className="flex md:flex-col gap-3">
-              {[
-                { label: 'Cuota mín.', value: '1.50' },
-                { label: 'Límite', value: '30d' },
-              ].map((stat) => (
-                <div
-                  key={stat.label}
-                  className="flex-1 md:flex-none bg-[#0F0F0F] border border-[#C9A227]/20 p-5 text-center min-w-[80px]"
-                >
-                  <div className="font-barlow font-black text-3xl text-[#C9A227] leading-none">
-                    {stat.value}
-                  </div>
-                  <div className="text-[9px] text-[#F5F0E8]/40 tracking-widest uppercase mt-1">
-                    {stat.label}
-                  </div>
-                </div>
-              ))}
             </div>
           </div>
         </div>
@@ -568,7 +550,7 @@ export default function App() {
             <span className="text-[#C9A227]">gana desde el inicio</span>
           </h2>
           <p className="text-[#F5F0E8]/50 text-sm leading-relaxed mb-10 max-w-sm mx-auto">
-            Más de 50.000 jugadores ya viven la emoción de las carreras con Babieca.
+            Miles de jugadores ya viven la emoción de las carreras con Babieca.
             Tu bono de bienvenida te espera.
           </p>
           <a
@@ -666,12 +648,13 @@ function BrandMark({ compact = false }: { compact?: boolean }) {
       <div className="flex items-center gap-2">
         <HorseSymbol height={30} />
         <div className="flex flex-col leading-none gap-0.5">
-          <span className="font-barlow font-black text-[14px] tracking-[0.3em] text-[#C9A227] uppercase leading-none">
-            BABIECA
-          </span>
           <span className="font-barlow font-bold text-[9px] tracking-[0.3em] text-[#F5F0E8]/45 uppercase leading-none">
             HÍPICAS
           </span>
+          <span className="font-barlow font-black text-[14px] tracking-[0.3em] text-[#C9A227] uppercase leading-none">
+            BABIECA
+          </span>
+          
         </div>
       </div>
     )
@@ -681,12 +664,13 @@ function BrandMark({ compact = false }: { compact?: boolean }) {
     <div className="flex flex-col items-center gap-2">
       <HorseSymbol height={80} />
       <div className="h-px w-16 bg-[#C9A227]/30 mt-1" />
-      <span className="font-barlow font-black text-3xl tracking-[0.4em] text-[#C9A227] uppercase leading-none">
-        BABIECA
-      </span>
       <span className="font-barlow font-bold text-xs tracking-[0.45em] text-[#F5F0E8]/45 uppercase leading-none">
         HÍPICAS
       </span>
+      <span className="font-barlow font-black text-3xl tracking-[0.4em] text-[#C9A227] uppercase leading-none">
+        BABIECA
+      </span>
+      
     </div>
   )
 }

@@ -11,13 +11,11 @@ export default defineConfig(({ mode }) => {
   const emitSourcemaps = mode === 'development'
 
   return {
-    base: process.env.FIGMA_PUBLIC_URL
-  ? `${process.env.FIGMA_PUBLIC_URL}/`
-  : '/LandingPageBabieca/',
+  base: '/LandingPageBabieca/',
   build: {
-      sourcemap: emitSourcemaps ? 'inline' : false,
-      minify: !emitSourcemaps,
-    },
+    sourcemap: emitSourcemaps ? 'inline' : false,
+    minify: !emitSourcemaps,
+  },
     plugins: [
       react(),
       tailwindcss(),

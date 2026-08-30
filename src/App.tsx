@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import horseLogo from "@/imports/18e38379-d3d3-4435-ac98-b5039834da47-removebg-preview-3.png"
+import horseLogo from "@/imports/png-horse-final.png"
 // ─── Admin flags ──────────────────────────────────────────────────────────────
 // Set to true when there are racing events in Venezuelan hippodromes this Saturday
 const SATURDAY_HAS_VENEZUELA_EVENTS = false

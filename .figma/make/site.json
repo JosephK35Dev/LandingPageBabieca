@@ -1,0 +1,10 @@
+{
+  "description": "Showcases Hípicas Babieca's horse racing promotions with a sleek, mobile-friendly design, engaging users to register and participate in weekly events.",
+  "robots": {
+    "index": false
+  },
+  "accessibility": {
+    "addBypassLinks": false,
+    "ignoreReducedMotion": false
+  }
+}

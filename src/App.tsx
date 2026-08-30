@@ -1,5 +1,4 @@
 import { useState } from 'react'
-import horseLogo from "@/imports/png-horse-final.png"
 // ─── Admin flags ──────────────────────────────────────────────────────────────
 // Set to true when there are racing events in Venezuelan hippodromes this Saturday
 const SATURDAY_HAS_VENEZUELA_EVENTS = false
@@ -707,7 +706,7 @@ function HorseSymbol({ height = 100 }: { height?: number }) {
       }}
     >
       <img
-        src={horseLogo}
+        src="/LandingPageBabieca/png-horse-final.png"
         alt="Caballo Babieca"
         style={{
           height,

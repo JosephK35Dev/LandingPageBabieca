@@ -45,7 +45,7 @@ const weeklyPromos: PromoDay[] = [
       {
         flags: '🌎',
         label: 'Demás países',
-        items: ['2.ª recarga → 200% deportivas', 'Rollover 200% → X8'],
+        items: ['2.ª recarga → 200% deportivas'],
       },
     ],
   },
@@ -75,7 +75,7 @@ const weeklyPromos: PromoDay[] = [
         items: ['1.ª recarga → 30%', '2.ª recarga → 20 giros', '3.ª recarga → 200% deportivas'],
       },
     ],
-    rollovers: ['30% → X6', '20% → X5', '200% dep. → X8'],
+    
   },
 ]
 
@@ -85,25 +85,76 @@ type CountryBonos = { flag: string; country: string; ranges: RangeRow[] }
 // ─── EDITABLE: Agrega o modifica países y rangos en este arreglo ─────────────
 const bonosData: CountryBonos[] = [
   {
-    flag: '🇨🇴',
+    flag: '',
     country: 'Colombia',
     ranges: [
-      { bono: '50%', rango: '$20.000 – $60.000 COP' },
-      { bono: '60%', rango: '$61.000 – $99.900 COP' },
-      { bono: '80%', rango: '$100.000 COP o más' },
+      { bono: '50%', rango: '$20.000 a $60.000 COP' },
+      { bono: '60%', rango: '$60.001 a $99.999 COP' },
+      { bono: '80%', rango: 'Desde $100.000 COP' },
     ],
   },
-  // Para agregar más países descomenta y completa:
-  // { flag: '🇻🇪', country: 'Venezuela', ranges: [ { bono: '50%', rango: '...' }, ... ] },
-  // { flag: '🇵🇪', country: 'Perú',      ranges: [ ... ] },
+  {
+    flag: '',
+    country: 'Perú',
+    ranges: [
+      { bono: '50%', rango: 'S/ 20 a S/ 60' },
+      { bono: '60%', rango: 'S/ 60,01 a S/ 99,99' },
+      { bono: '80%', rango: 'Desde S/ 100' },
+    ],
+  },
+  {
+    flag: '',
+    country: 'Dólar (USD)',
+    ranges: [
+      { bono: '50%', rango: 'US$5 a US$20' },
+      { bono: '60%', rango: 'US$20,01 a US$59,99' },
+      { bono: '80%', rango: 'Desde US$60' },
+    ],
+  },
+  {
+    flag: '',
+    country: 'Chile',
+    ranges: [
+      { bono: '50%', rango: '$5.000 a $20.000 CLP' },
+      { bono: '60%', rango: '$20.001 a $59.999 CLP' },
+      { bono: '80%', rango: 'Desde $60.000 CLP' },
+    ],
+  },
+  {
+    flag: '',
+    country: 'Venezuela',
+    ranges: [
+      { bono: '50%', rango: 'Bs. 1.000 a Bs. 3.000' },
+      { bono: '60%', rango: 'Bs. 3.001 a Bs. 4.999' },
+      { bono: '80%', rango: 'Desde Bs. 5.000' },
+    ],
+  },
+  {
+    flag: '',
+    country: 'Brasil',
+    ranges: [
+      { bono: '50%', rango: 'R$20 a R$70' },
+      { bono: '60%', rango: 'R$70,01 a R$109' },
+      { bono: '80%', rango: 'Desde R$110' },
+    ],
+  },
+  {
+    flag: '',
+    country: 'México',
+    ranges: [
+      { bono: '50%', rango: 'MX$85 a MX$160' },
+      { bono: '60%', rango: 'MX$160,01 a MX$259' },
+      { bono: '80%', rango: 'Desde MX$260' },
+    ],
+  },
 ]
 // ─────────────────────────────────────────────────────────────────────────────
 
 const steps = [
   { n: '01', title: 'Regístrate', desc: 'Crea tu cuenta en menos de 2 minutos.' },
-  { n: '02', title: 'Verifica',   desc: 'Confirma tu identidad con un documento válido.' },
-  { n: '03', title: 'Deposita',   desc: 'Recarga con tu método de pago favorito.' },
-  { n: '04', title: 'Apuesta',    desc: 'Elige tu carrera y vive la emoción.' },
+  { n: '02', title: 'Verifica', desc: 'Confirma tu identidad con un documento válido.' },
+  { n: '03', title: 'Deposita', desc: 'Recarga con tu método de pago favorito.' },
+  { n: '04', title: 'Apuesta', desc: 'Elige tu carrera y vive la emoción.' },
 ]
 
 const faqs = [
@@ -141,7 +192,40 @@ const faqs = [
 
 export default function App() {
   const [openFaq, setOpenFaq] = useState<number | null>(null)
+  const [countryIndex, setCountryIndex] = useState(0)
 
+  const today =new Date().getDay() // 0 = Domingo, 1 = Lunes, ..., 6 = Sábado
+
+  const dailyPromos: PromoDay[] = [
+    weeklyPromos[0], // Lunes
+    weeklyPromos[1], // Martes
+    weeklyPromos[2], // Miércoles
+    {
+      ...weeklyPromos[3],
+      days: 'Jueves',
+      badge: 'JUE',
+    },
+    {
+      ...weeklyPromos[3],
+      days: 'Viernes',
+      badge: 'VIE',
+    },
+    {
+      days: 'Sábado',
+      badge: 'SÁB',
+      icon: '🐴🔥',
+      title: 'SÁBADO DE GALOPE',
+      items: ['Bono en hipismo del 20%', 'Rollover X5'],
+    },
+    {
+      days: 'Domingo',
+      badge: 'DOM',
+      icon: '🏆',
+      title: 'JORNADA HÍPICA',
+      items: ['La Rinconada'],
+    },
+  ]
+  const todayPromo = dailyPromos[today === 0 ? 6 : today - 1]
   return (
     <div className="min-h-screen bg-[#090909] text-[#F5F0E8] font-inter overflow-x-hidden">
 
@@ -149,7 +233,7 @@ export default function App() {
       <header className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-5 py-3 bg-[#090909]/92 backdrop-blur-sm border-b border-[#C9A227]/15">
         <BrandMark compact />
         <a
-          href="#registro"
+          href="https://hipicasbabieca.io"
           className="font-barlow font-bold text-xs tracking-[0.2em] uppercase text-[#090909] bg-[#C9A227] px-5 py-2.5 hover:bg-[#DDB52E] active:scale-95 transition-all duration-150"
         >
           REGÍSTRATE
@@ -221,15 +305,70 @@ export default function App() {
             <span className="font-barlow font-bold text-xs tracking-[0.2em] text-white uppercase">HOY · VÁLIDO 24H</span>
           </div>
           <div className="relative p-7 md:p-10">
-            <div className="font-barlow font-black text-7xl md:text-8xl text-[#C9A227] leading-none mb-1">80%</div>
-            <h2 className="font-barlow font-black text-2xl md:text-3xl uppercase text-white mb-3">
-              Recarga del día 🐴🔥
+            <div className="font-barlow font-bold text-xs tracking-[0.3em] text-[#C9A227] uppercase mb-3">
+              {todayPromo.days}
+            </div>
+
+            <h2 className="font-barlow font-black text-3xl md:text-4xl uppercase text-white mb-3 leading-tight">
+              {todayPromo.title} {todayPromo.icon}
             </h2>
-            <p className="text-[#F5F0E8]/55 text-sm leading-relaxed mb-7 max-w-xs">
-              Recarga hoy y recibe hasta el{' '}
-              <strong className="text-[#C9A227]">80% de bono</strong> en tu primera recarga del
-              día. Rollover según el porcentaje recibido.
-            </p>
+
+            <div className="space-y-3 mb-6">
+              {todayPromo.items.map((item, i) => (
+                <div key={i} className="flex items-center gap-2">
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#C9A227] flex-shrink-0" />
+                  <span className="text-sm text-[#F5F0E8]/70">
+                    {item}
+                  </span>
+                </div>
+              ))}
+
+              {todayPromo.groups && (
+                <div className="space-y-4 mt-4">
+                  {todayPromo.groups.map((group, i) => (
+                    <div
+                      key={i}
+                      className="border-l border-[#C9A227]/30 pl-4"
+                    >
+                      <div className="text-xs font-barlow font-bold text-[#C9A227] uppercase tracking-wider mb-2">
+                        {group.label}
+                      </div>
+
+                      <div className="space-y-1.5">
+                        {group.items.map((item, j) => (
+                          <div key={j} className="flex items-center gap-2">
+                            <span className="w-1 h-1 rounded-full bg-[#C9A227]/60 flex-shrink-0" />
+                            <span className="text-sm text-[#F5F0E8]/70">
+                              {item}
+                            </span>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+
+            {today === 6 && (
+              <div className="bg-[#C9A227]/5 border border-[#C9A227]/20 px-4 py-3 mb-7 max-w-md">
+                <p className="text-xs text-[#F5F0E8]/55 leading-relaxed">
+                  <strong className="text-[#C9A227]">Importante:</strong> Esta promoción
+                  aplica únicamente los sábados en los que no haya carreras nacionales
+                  en hipódromos de Venezuela.
+                </p>
+              </div>
+            )}
+
+            {today === 2 && (
+              <div className="bg-[#C9A227]/5 border border-[#C9A227]/20 px-4 py-3 mb-7 max-w-md">
+                <p className="text-xs text-[#F5F0E8]/55 leading-relaxed">
+                  <strong className="text-[#C9A227]">Importante:</strong> El beneficio
+                  de la 2.ª recarga puede variar según el país.
+                </p>
+              </div>
+            )}
+
             <a
               href="#registro"
               className="inline-block bg-[#C9A227] text-[#090909] font-barlow font-bold text-sm tracking-[0.2em] uppercase px-8 py-3.5 hover:bg-[#DDB52E] active:scale-95 transition-all duration-150"
@@ -286,7 +425,7 @@ export default function App() {
               </div>
               <div className="bg-[#C9A227]/5 border border-[#C9A227]/15 px-4 py-3">
                 <p className="text-xs text-[#F5F0E8]/55 leading-relaxed">
-                  Sin recarga mínima. Disponible los sábados sin eventos en hipódromos de Venezuela (Valencia). 
+                  Sin recarga mínima. Disponible los sábados sin eventos en hipódromos de Venezuela (Valencia).
                 </p>
               </div>
             </div>
@@ -321,7 +460,7 @@ export default function App() {
             <div className="relative">
               <div className="text-3xl mb-3">🏆</div>
               <h2 className="font-barlow font-black text-3xl uppercase text-white mb-3">
-                CARRERAS NACIONALES (LA RINCONADA)
+                LA RINCONADA
               </h2>
               <p className="text-[#F5F0E8]/55 text-sm leading-relaxed max-w-sm">
                 Vive la emoción de la Rinconada con Babieca. Cada domingo es una jornada épica.
@@ -339,43 +478,97 @@ export default function App() {
             El porcentaje de bono que recibes depende del monto depositado.
             A mayor recarga, mayor bono.
           </p>
-          <div className="space-y-4">
-            {bonosData.map((country, ci) => (
-              <div key={ci} className="border border-[#C9A227]/20 overflow-hidden">
-                <div className="bg-[#C9A227]/8 border-b border-[#C9A227]/20 px-5 py-3 flex items-center gap-3">
-                  <span className="text-xl">{country.flag}</span>
-                  <span className="font-barlow font-bold text-sm tracking-[0.2em] text-[#C9A227] uppercase">
-                    {country.country}
-                  </span>
-                </div>
-                <table className="w-full text-sm">
-                  <thead>
-                    <tr className="border-b border-[#C9A227]/10">
-                      <th className="text-left py-2.5 px-5 font-barlow font-bold text-[10px] tracking-[0.2em] text-[#F5F0E8]/35 uppercase w-24">
-                        Bono
-                      </th>
-                      <th className="text-left py-2.5 px-5 font-barlow font-bold text-[10px] tracking-[0.2em] text-[#F5F0E8]/35 uppercase">
-                        Rango de depósito
-                      </th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {country.ranges.map((r, ri) => (
-                      <tr
-                        key={ri}
-                        className="border-b border-[#C9A227]/10 last:border-0 hover:bg-[#C9A227]/5 transition-colors"
-                      >
-                        <td className="py-3.5 px-5 font-barlow font-black text-xl text-[#C9A227]">
-                          {r.bono}
-                        </td>
-                        <td className="py-3.5 px-5 text-[#F5F0E8]/65">{r.rango}</td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
+          <div className="border border-[#C9A227]/20 overflow-hidden">
+
+            {/* Encabezado del país */}
+            <div className="bg-[#C9A227]/8 border-b border-[#C9A227]/20 px-5 py-4 flex items-center justify-between">
+
+              <button
+                onClick={() =>
+                  setCountryIndex(
+                    countryIndex === 0 ? bonosData.length - 1 : countryIndex - 1
+                  )
+                }
+                className="w-9 h-9 border border-[#C9A227]/30 text-[#C9A227] hover:bg-[#C9A227] hover:text-[#090909] transition-all"
+                aria-label="País anterior"
+              >
+                ←
+              </button>
+
+              <div className="flex items-center gap-3">
+                <span className="text-2xl">
+                  {bonosData[countryIndex].flag}
+                </span>
+
+                <span className="font-barlow font-bold text-sm tracking-[0.2em] text-[#C9A227] uppercase">
+                  {bonosData[countryIndex].country}
+                </span>
               </div>
+
+              <button
+                onClick={() =>
+                  setCountryIndex(
+                    countryIndex === bonosData.length - 1 ? 0 : countryIndex + 1
+                  )
+                }
+                className="w-9 h-9 border border-[#C9A227]/30 text-[#C9A227] hover:bg-[#C9A227] hover:text-[#090909] transition-all"
+                aria-label="País siguiente"
+              >
+                →
+              </button>
+
+            </div>
+
+            {/* Tabla */}
+            <table className="w-full text-sm">
+              <thead>
+                <tr className="border-b border-[#C9A227]/10">
+                  <th className="text-left py-2.5 px-5 font-barlow font-bold text-[10px] tracking-[0.2em] text-[#F5F0E8]/35 uppercase w-24">
+                    Bono
+                  </th>
+
+                  <th className="text-left py-2.5 px-5 font-barlow font-bold text-[10px] tracking-[0.2em] text-[#F5F0E8]/35 uppercase">
+                    Rango de depósito
+                  </th>
+                </tr>
+              </thead>
+
+              <tbody>
+                {bonosData[countryIndex].ranges.map((r, ri) => (
+                  <tr
+                    key={ri}
+                    className="border-b border-[#C9A227]/10 last:border-0 hover:bg-[#C9A227]/5 transition-colors"
+                  >
+                    <td className="py-3.5 px-5 font-barlow font-black text-xl text-[#C9A227]">
+                      {r.bono}
+                    </td>
+
+                    <td className="py-3.5 px-5 text-[#F5F0E8]/65">
+                      {r.rango}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+
+          </div>
+
+          {/* Indicador del carrusel */}
+          <div className="flex justify-center gap-1.5 mt-4">
+            {bonosData.map((country, i) => (
+              <button
+                key={country.country}
+                onClick={() => setCountryIndex(i)}
+                className={`w-1.5 h-1.5 rounded-full transition-all ${i === countryIndex
+                  ? 'bg-[#C9A227] w-5'
+                  : 'bg-[#C9A227]/25'
+                  }`}
+                aria-label={`Ver ${country.country}`}
+              />
             ))}
           </div>
+
+
           <p className="text-[10px] text-[#F5F0E8]/25 tracking-wider mt-3 text-right uppercase">
             * Aplican términos y condiciones
           </p>
@@ -513,9 +706,8 @@ export default function App() {
                     {faq.q}
                   </span>
                   <span
-                    className={`flex-shrink-0 text-[#C9A227] transition-transform duration-200 ${
-                      openFaq === i ? 'rotate-45' : ''
-                    }`}
+                    className={`flex-shrink-0 text-[#C9A227] transition-transform duration-200 ${openFaq === i ? 'rotate-45' : ''
+                      }`}
                   >
                     <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
                       <path d="M8 2V14M2 8H14" stroke="currentColor" strokeWidth="1.5" strokeLinecap="square" />
@@ -554,7 +746,7 @@ export default function App() {
             Tu bono de bienvenida te espera.
           </p>
           <a
-            href="#"
+            href="https://hipicasbabieca.io"
             className="inline-block bg-[#BF1E2E] text-white font-barlow font-black text-xl tracking-[0.2em] uppercase px-12 py-5 hover:bg-[#D42235] active:scale-95 transition-all duration-150 shadow-xl shadow-[#BF1E2E]/20"
           >
             REGÍSTRATE AHORA
@@ -654,7 +846,7 @@ function BrandMark({ compact = false }: { compact?: boolean }) {
           <span className="font-barlow font-black text-[14px] tracking-[0.3em] text-[#C9A227] uppercase leading-none">
             BABIECA
           </span>
-          
+
         </div>
       </div>
     )
@@ -670,7 +862,7 @@ function BrandMark({ compact = false }: { compact?: boolean }) {
       <span className="font-barlow font-black text-3xl tracking-[0.4em] text-[#C9A227] uppercase leading-none">
         BABIECA
       </span>
-      
+
     </div>
   )
 }
@@ -679,7 +871,7 @@ function BrandMark({ compact = false }: { compact?: boolean }) {
 // mix-blend-mode:screen makes the black background invisible on our dark canvas
 function HorseSymbol({ height = 100 }: { height?: number }) {
   return (
-      <div
+    <div
       style={{
         height,
         display: 'flex',

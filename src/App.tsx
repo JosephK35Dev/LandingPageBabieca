@@ -1,7 +1,5 @@
 import { useState } from 'react'
-// ─── Admin flags ──────────────────────────────────────────────────────────────
-// Set to true when there are racing events in Venezuelan hippodromes this Saturday
-const SATURDAY_HAS_VENEZUELA_EVENTS = false
+import TermsAndConditions from './TermsAndConditions'
 
 // ─── Data ─────────────────────────────────────────────────────────────────────
 
@@ -75,7 +73,7 @@ const weeklyPromos: PromoDay[] = [
         items: ['1.ª recarga → 30%', '2.ª recarga → 20 giros', '3.ª recarga → 200% deportivas'],
       },
     ],
-    
+
   },
 ]
 
@@ -193,8 +191,9 @@ const faqs = [
 export default function App() {
   const [openFaq, setOpenFaq] = useState<number | null>(null)
   const [countryIndex, setCountryIndex] = useState(0)
+  const [showTerms, setShowTerms] = useState(false)
 
-  const today =new Date().getDay() // 0 = Domingo, 1 = Lunes, ..., 6 = Sábado
+  const today = new Date().getDay() // 0 = Domingo, 1 = Lunes, ..., 6 = Sábado
 
   const dailyPromos: PromoDay[] = [
     weeklyPromos[0], // Lunes
@@ -226,18 +225,36 @@ export default function App() {
     },
   ]
   const todayPromo = dailyPromos[today === 0 ? 6 : today - 1]
+
+  if (showTerms) {
+    return (
+      <TermsAndConditions
+        onBack={() => setShowTerms(false)}
+      />
+    )
+  }
+
   return (
     <div className="min-h-screen bg-[#090909] text-[#F5F0E8] font-inter overflow-x-hidden">
 
       {/* ── NAV ── */}
       <header className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-5 py-3 bg-[#090909]/92 backdrop-blur-sm border-b border-[#C9A227]/15">
         <BrandMark compact />
-        <a
-          href="https://hipicasbabieca.io"
-          className="font-barlow font-bold text-xs tracking-[0.2em] uppercase text-[#090909] bg-[#C9A227] px-5 py-2.5 hover:bg-[#DDB52E] active:scale-95 transition-all duration-150"
-        >
-          REGÍSTRATE
-        </a>
+        <div className="flex items-center gap-2">
+          <button
+            onClick={() => setShowTerms(true)}
+            className="hidden sm:inline-flex items-center px-4 py-2 rounded-full border border-[#C9A227]/25 text-[10px] font-bold tracking-[0.12em] text-[#F5F0E8]/70 hover:text-[#C9A227] hover:border-[#C9A227]/60 transition-all"
+          >
+            TÉRMINOS
+          </button>
+
+          <a
+            href="https://hipicasbabieca.io"
+            className="font-barlow font-bold text-xs tracking-[0.2em] uppercase text-[#090909] bg-[#C9A227] px-5 py-2.5 hover:bg-[#DDB52E] active:scale-95 transition-all duration-150"
+          >
+            REGÍSTRATE
+          </a>
+        </div>
       </header>
 
       {/* ── HERO ── */}
@@ -395,52 +412,52 @@ export default function App() {
       <section className="py-16 px-5">
         <div className="max-w-2xl mx-auto">
           <SectionDivider label="SÁBADO" />
-          {!SATURDAY_HAS_VENEZUELA_EVENTS ? (
-            <div className="border border-[#C9A227]/40 bg-[#0F0F0F] p-7">
-              <div className="flex items-start justify-between mb-5">
-                <div>
-                  <div className="font-barlow font-bold text-[10px] tracking-[0.3em] text-[#C9A227] uppercase mb-1">
-                    Sábado
-                  </div>
-                  <h2 className="font-barlow font-black text-3xl uppercase text-white leading-tight">
-                    SÁBADO DE GALOPE
-                  </h2>
-                  <div className="text-xl mt-1">🐴🔥</div>
+
+          <div className="border border-[#C9A227]/40 bg-[#0F0F0F] p-7">
+            <div className="flex items-start justify-between mb-5">
+              <div>
+                <div className="font-barlow font-bold text-[10px] tracking-[0.3em] text-[#C9A227] uppercase mb-1">
+                  Sábado
                 </div>
-                <div className="bg-[#C9A227]/10 border border-[#C9A227]/30 px-4 py-3 text-center flex-shrink-0">
-                  <div className="font-barlow font-black text-3xl text-[#C9A227] leading-none">20%</div>
-                  <div className="text-[9px] text-[#F5F0E8]/50 uppercase tracking-wider mt-1">en hipismo</div>
-                </div>
+                <h2 className="font-barlow font-black text-3xl uppercase text-white leading-tight">
+                  SÁBADO DE GALOPE
+                </h2>
+                <div className="text-xl mt-1">🐴🔥</div>
               </div>
-              <div className="w-full h-px bg-[#C9A227]/15 mb-5" />
-              <div className="grid grid-cols-2 gap-5 mb-5">
-                <div>
-                  <div className="text-[10px] text-[#F5F0E8]/40 tracking-widest uppercase mb-2">Categoría</div>
-                  <div className="font-barlow font-bold text-lg text-white">Hipismo</div>
-                </div>
-                <div>
-                  <div className="text-[10px] text-[#F5F0E8]/40 tracking-widest uppercase mb-2">Rollover</div>
-                  <div className="font-barlow font-black text-lg text-[#C9A227]">X5</div>
-                </div>
-              </div>
-              <div className="bg-[#C9A227]/5 border border-[#C9A227]/15 px-4 py-3">
-                <p className="text-xs text-[#F5F0E8]/55 leading-relaxed">
-                  Sin recarga mínima. Disponible los sábados sin eventos en hipódromos de Venezuela (Valencia).
-                </p>
+              <div className="bg-[#C9A227]/10 border border-[#C9A227]/30 px-4 py-3 text-center flex-shrink-0">
+                <div className="font-barlow font-black text-3xl text-[#C9A227] leading-none">20%</div>
+                <div className="text-[9px] text-[#F5F0E8]/50 uppercase tracking-wider mt-1">en hipismo</div>
               </div>
             </div>
-          ) : (
-            <div className="border border-[#BF1E2E]/30 bg-[#0F0F0F] p-7">
-              <div className="text-3xl mb-3">🏇</div>
-              <h2 className="font-barlow font-black text-3xl uppercase text-white mb-2">
-                SÁBADO DE CARRERAS
-              </h2>
-              <p className="font-barlow font-bold text-xl text-[#C9A227] mb-4">Jornada hípica nacional</p>
-              <p className="text-sm text-[#F5F0E8]/55 leading-relaxed">
-                Sin promociones disponibles durante eventos en Venezuela.
+            <div className="w-full h-px bg-[#C9A227]/15 mb-5" />
+            <div className="grid grid-cols-2 gap-5 mb-5">
+              <div>
+                <div className="text-[10px] text-[#F5F0E8]/40 tracking-widest uppercase mb-2">Categoría</div>
+                <div className="font-barlow font-bold text-lg text-white">Hipismo</div>
+              </div>
+              <div>
+                <div className="text-[10px] text-[#F5F0E8]/40 tracking-widest uppercase mb-2">Rollover</div>
+                <div className="font-barlow font-black text-lg text-[#C9A227]">X5</div>
+              </div>
+            </div>
+            <div className="bg-[#C9A227]/5 border border-[#C9A227]/15 px-4 py-3">
+              <p className="text-xs text-[#F5F0E8]/55 leading-relaxed">
+                Sin recarga mínima. Disponible los sábados sin eventos en hipódromos de Venezuela (Valencia).
               </p>
             </div>
-          )}
+          </div>
+
+          <div className="border border-[#BF1E2E]/30 bg-[#0F0F0F] p-7">
+            <div className="text-3xl mb-3">🏇</div>
+            <h2 className="font-barlow font-black text-3xl uppercase text-white mb-2">
+              SÁBADO DE CARRERAS
+            </h2>
+            <p className="font-barlow font-bold text-xl text-[#C9A227] mb-4">Jornada hípica nacional</p>
+            <p className="text-sm text-[#F5F0E8]/55 leading-relaxed">
+              Sin promociones disponibles durante eventos en Venezuela.
+            </p>
+          </div>
+
         </div>
       </section>
 
@@ -761,11 +778,21 @@ export default function App() {
       <footer className="py-10 px-5 border-t border-[#C9A227]/10">
         <div className="max-w-2xl mx-auto flex flex-col md:flex-row items-center justify-between gap-5">
           <BrandMark compact />
-          <p className="text-[10px] text-[#F5F0E8]/25 tracking-wider text-center md:text-right">
-            © 2024 Hípicas Babieca · Todos los derechos reservados
-            <br />
-            Juego responsable · +18 · Términos y condiciones
-          </p>
+          <div className="text-[10px] text-[#F5F0E8]/25 tracking-wider text-center md:text-right">
+            <p>
+              © 2026 Hípicas Babieca · Todos los derechos reservados
+            </p>
+
+            <p className="mt-1">
+              Juego responsable · +18 ·{' '}
+              <button
+                onClick={() => setShowTerms(true)}
+                className="text-[#F5F0E8]/35 hover:text-[#C9A227] transition-colors underline underline-offset-2"
+              >
+                Términos y condiciones
+              </button>
+            </p>
+          </div>
         </div>
       </footer>
     </div>

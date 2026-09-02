@@ -689,7 +689,11 @@ export default function TermsAndConditions({
   onBack: () => void
 }) {
   const [countryIndex, setCountryIndex] = useState(0)
-
+  
+  useEffect(() => {
+  window.scrollTo(0, 0)
+  }, [])
+  
   const selectedCountry = countryBonuses[countryIndex]
 
   const previousCountry = () => {

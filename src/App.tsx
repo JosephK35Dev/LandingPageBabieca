@@ -243,8 +243,8 @@ export default function App() {
         <div className="flex items-center gap-2">
           <button
             onClick={() => setShowTerms(true)}
-            className="hidden sm:inline-flex items-center px-4 py-2 rounded-full border border-[#C9A227]/25 text-[10px] font-bold tracking-[0.12em] text-[#F5F0E8]/70 hover:text-[#C9A227] hover:border-[#C9A227]/60 transition-all"
-          >
+            className="inline-flex items-center px-3 sm:px-4 py-2 rounded-full border border-[#C9A227]/25 text-[9px] sm:text-[10px] font-bold tracking-[0.1em] sm:tracking-[0.12em] text-[#F5F0E8]/70 hover:text-[#C9A227] hover:border-[#C9A227]/60 transition-all"
+>
             TÉRMINOS
           </button>
 
@@ -288,13 +288,7 @@ export default function App() {
             La casa hípica con los mejores dividendos y bonos de América Latina.
             Miles de apostadores ya ganan con nosotros cada semana.
           </p>
-          <a
-            href="#registro"
-            className="group inline-flex items-center gap-3 bg-[#BF1E2E] text-white font-barlow font-black text-xl tracking-[0.15em] uppercase px-10 py-5 hover:bg-[#D42235] active:scale-95 transition-all duration-150 shadow-lg shadow-[#BF1E2E]/25"
-          >
-            REGÍSTRATE AHORA
-            <span className="text-white/60 group-hover:translate-x-1 transition-transform">→</span>
-          </a>
+          
           <p className="mt-4 text-[10px] text-[#F5F0E8]/30 tracking-widest uppercase">
             +18 · Juega responsablemente
           </p>

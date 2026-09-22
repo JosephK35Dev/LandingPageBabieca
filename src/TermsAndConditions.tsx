@@ -799,6 +799,15 @@ export default function TermsAndConditions({
             </Bullet>
 
             <Bullet>
+              Los bonos están sujetos a una vigencia determinada, la cual será 
+              informada al momento de su aplicación o asignación y podrá variar 
+              según cada promoción. Una vez finalizado dicho período, HÍPICAS 
+              BABIECA podrá retirar o invalidar el bono si este no ha sido 
+              utilizado o permanece disponible en la cuenta, de acuerdo con la 
+              vigencia establecida.
+            </Bullet>
+
+            <Bullet>
               Las ganancias máximas de bonos y giros están sujetas a los
               límites indicados en cada promoción. Cualquier excedente sobre la
               ganancia máxima aplicable podrá ser descontado del saldo

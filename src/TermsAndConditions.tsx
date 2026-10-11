@@ -819,6 +819,17 @@ export default function TermsAndConditions({
               2026 o hasta agotar existencia/disponibilidad, lo que ocurra
               primero.
             </Bullet>
+
+            <Bullet>
+              Condiciones para activar retiros con bonos por registro: Para 
+              habilitar los retiros, el usuario deberá realizar una primera 
+              recarga por el mismo valor de las ganancias obtenidas. Asimismo, 
+              deberá cumplir un (1) rollover, apostando el saldo total disponible 
+              (bono + recarga) en slots tragamonedas (excepto casino en vivo), 
+              deportes PreMatch con cuotas superiores a 1.80 o hípicas. Una vez 
+              cumplidos estos requisitos, podrá solicitar su retiro, sujeto a las 
+              condiciones generales de la plataforma.
+            </Bullet>
           </div>
         </section>
 

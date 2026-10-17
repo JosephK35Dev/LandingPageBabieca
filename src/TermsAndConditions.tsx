@@ -777,6 +777,11 @@ export default function TermsAndConditions({
               mayores de 18 años y registrados en HÍPICAS BABIECA.
             </Bullet>
 
+            </Bullet>
+              Los sábados y domingos en los que se realicen carreras nacionales, 
+              se permitirá un máximo de 2 retiros por día.
+            </bullet>
+        
             <Bullet>
               Los bonos son personales e intransferibles. HÍPICAS BABIECA
               podrá validar la identidad del usuario y revisar datos asociados

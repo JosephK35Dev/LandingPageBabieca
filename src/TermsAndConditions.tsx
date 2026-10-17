@@ -780,7 +780,7 @@ export default function TermsAndConditions({
             </Bullet>
               Los sábados y domingos en los que se realicen carreras nacionales, 
               se permitirá un máximo de 2 retiros por día.
-            </bullet>
+            </Bullet>
         
             <Bullet>
               Los bonos son personales e intransferibles. HÍPICAS BABIECA

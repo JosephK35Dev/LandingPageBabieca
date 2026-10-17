@@ -777,7 +777,7 @@ export default function TermsAndConditions({
               mayores de 18 años y registrados en HÍPICAS BABIECA.
             </Bullet>
 
-            </Bullet>
+            <Bullet>
               Los sábados y domingos en los que se realicen carreras nacionales, 
               se permitirá un máximo de 2 retiros por día.
             </Bullet>
